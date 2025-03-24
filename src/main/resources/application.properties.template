@@ -1,0 +1,46 @@
+# ============================
+# Application Configuration
+# ============================
+# Application Name and Active Profile
+spring.application.name=sso-poc
+spring.profiles.active=dev
+
+# ============================
+# OAuth2 / Google SSO Configuration
+# ============================
+# Google Client ID and Secret (from Google Cloud Console)
+spring.security.oauth2.client.registration.google.client-id=YOUR_CLIENT_ID
+spring.security.oauth2.client.registration.google.client-secret=YOUR_CLIENT_SECRET
+
+# Authorized redirect URI for Google OAuth
+spring.security.oauth2.client.registration.google.redirect-uri={baseUrl}/login/oauth2/code/google
+spring.security.oauth2.client.registration.google.scope=openid,profile,email
+
+# Base URL for local testing
+baseUrl=http://localhost:8080
+
+# ============================
+# Spring Security Configuration
+# ============================
+# Enable CSRF protection (recommended for OAuth2)
+spring.security.oauth2.client.registration.google.authorization-grant-type=authorization_code
+spring.security.oauth2.client.registration.google.client-name=Google
+spring.security.oauth2.client.provider.google.token-uri=https://oauth2.googleapis.com/token
+spring.security.oauth2.client.provider.google.user-info-uri=https://www.googleapis.com/oauth2/v3/userinfo
+spring.security.oauth2.client.provider.google.jwk-set-uri=https://www.googleapis.com/oauth2/v3/certs
+spring.security.oauth2.client.provider.google.user-name-attribute=sub
+
+# ============================
+# Logging Configuration
+# ============================
+# Enable debug-level logging for Spring Security
+logging.level.org.springframework.security=DEBUG
+
+# Reduce unnecessary logging noise
+logging.level.org.hibernate.SQL=ERROR
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=ERROR
+
+# Avoid shutdown conflicts by disabling shutdown hooks (optional for debugging)
+server.shutdown=immediate
+
+server.servlet.session.timeout=30m

@@ -1,0 +1,12 @@
+# Ignore IDE and Gradle files
+.idea/
+.gradle/
+build/
+*.iml
+
+# Ignore OS-specific files
+*.DS_Store
+Thumbs.db
+
+# Ignore application properties
+application.properties
