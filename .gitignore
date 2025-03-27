@@ -10,3 +10,5 @@ Thumbs.db
 
 # Ignore application properties
 application.properties
+application-google.properties
+application-ms.properties

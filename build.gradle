@@ -4,7 +4,7 @@ plugins {
     id 'java'
 }
 
-group = 'com.staff'
+group = 'com.poc'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -25,8 +25,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'  // Enable Spring Security
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // OAuth2 for Google SSO
 
+    // JPA and MySQL for DB operations
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'mysql:mysql-connector-java'
+
     // Testing dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // Optional for SQL script execution
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 }
