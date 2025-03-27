@@ -18,7 +18,3 @@ A pure Java/Spring Boot POC (Proof of Concept) showcasing the working of Google 
 - OAuth2 / Google SSO
 - Gradle 7.6.1
 - MySQL 8.0.41
-
-## Future Releases
-- Implementing BCrypt for user data storage.
-- Role-based authorization.
