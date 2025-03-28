@@ -1,6 +1,9 @@
 package com.poc.entity;
 
+import com.poc.enums.AuthenticatedBy;
+
 import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 public class User {
@@ -16,6 +19,12 @@ public class User {
     private String familyName;
     private String pictureUrl;
 
+    @Enumerated(EnumType.STRING)
+    private AuthenticatedBy authenticatedBy;
+    @Column(columnDefinition = "TEXT") //Lob preferred
+    private String idToken;
+
+    private Instant expiryTime;
     public User() {
     }
 
@@ -65,5 +74,29 @@ public class User {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    public String getIdToken() {
+        return idToken;
+    }
+
+    public AuthenticatedBy getAuthenticatedBy() {
+        return authenticatedBy;
+    }
+
+    public void setAuthenticatedBy(AuthenticatedBy authenticatedBy) {
+        this.authenticatedBy = authenticatedBy;
+    }
+
+    public void setIdToken(String idToken) {
+        this.idToken = idToken;
+    }
+
+    public Instant getExpiryTime() {
+        return expiryTime;
+    }
+
+    public void setExpiryTime(Instant expiryTime) {
+        this.expiryTime = expiryTime;
     }
 }
