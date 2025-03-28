@@ -20,15 +20,26 @@ public class UserService {
     }
 
     /**
-     * Checks if the user exists in the database.
-     * Checks if the existing user has AuthenticatedBy set, if not then assign it.
-     * If not, create and save a new user.
-     * If the user exists, update id_token and expiryTime.
+     * Processes the authenticated OIDC user and updates/creates the corresponding user record in the database.
+     *
+     * Workflow:
+     * 1. Checks if the user already exists in the database.
+     * 2. If the user exists:
+     *    - Checks if `authenticatedBy` is null.
+     *    - If null, assigns a value based on existing `idToken`:
+     *        - `LOCAL` if `idToken` is null or empty (user was created locally).
+     *        - `SSO` if `idToken` is present (user logged in via SSO previously).
+     *    - Updates `idToken` and `expiryTime` if they have changed.
+     * 3. If the user does not exist:
+     *    - Creates a new user with attributes from the OIDC user.
+     *    - Assigns `authenticatedBy` to `SSO` for new SSO users.
+     * 4. Saves the user only if changes were made or if the user is newly created.
      *
      * @param oidcUser The authenticated OIDC user with attributes.
-     *(Check OidcUser class for more details.)
-     * @return The saved or existing user.
+     *                 (Check OidcUser class for available attributes like email, name, etc.)
+     * @return The saved or existing user with updated attributes.
      */
+
     public User processOAuth2User(OidcUser oidcUser) {
         String email = oidcUser.getAttribute("email");
 

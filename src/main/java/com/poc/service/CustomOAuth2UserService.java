@@ -17,6 +17,18 @@ public class CustomOAuth2UserService extends OidcUserService {  // Changed from 
         this.userService = userService;
     }
 
+    /**
+     * Loads and processes the authenticated OIDC user.
+     *
+     * - Retrieves the OIDC user using `super.loadUser(userRequest)`.
+     * - Passes the user to `processOAuth2User()` for DB-related checks and updates.
+     * - Returns the original OIDC user with updated information.
+     *
+     * @param userRequest The request containing OIDC user details.
+     * @return The authenticated OIDC user.
+     * @throws OAuth2AuthenticationException .
+     */
+
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
         // Call parent class to get the OIDC user
@@ -25,7 +37,7 @@ public class CustomOAuth2UserService extends OidcUserService {  // Changed from 
         // Process the user data and save if not found
         User user = userService.processOAuth2User(oidcUser);
 
-        // Return enriched OIDC user with DB information
+        // Return OIDC user with updated DB information
         return oidcUser;
     }
 }

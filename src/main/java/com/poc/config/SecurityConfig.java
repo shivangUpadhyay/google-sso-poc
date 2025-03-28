@@ -24,6 +24,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private OAuth2UserService<OidcUserRequest, OidcUser> customOAuth2UserService;
 
+    /**
+     * Configures security settings for the application.
+     *
+     * - Permits access to public endpoints.
+     * - Requires authentication for other requests.
+     * - Configures OAuth2 login and logout behavior.
+     * - Ignores CSRF for relevant OAuth2 endpoints.
+     *
+     * @param http The HttpSecurity object to configure security.
+     * @throws Exception If a security configuration error occurs.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
